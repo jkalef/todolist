@@ -1,0 +1,44 @@
+<hr>
+<form action="/" method="post">
+	<label for="task">Task Name</label>
+	<input type="hidden" name="status">
+	<input type="text" name="task" id="task">
+	<input type="submit" value="Create Task">
+</form>
+<hr>
+
+<%# Want to display a button that says "Mark As Complete" beside each task %>
+<h2>Still To Do</h2>
+<table>
+	<% @task_list_todo.each do |x| %>
+	<tr>
+		<td><%= x.task %></td>
+		<td>
+			<%# need to make the button be a "Patch" %>
+			<form action="/<%= x.id %>" method="post">
+				<input type="hidden" name="_method" value="patch">
+				<input type="hidden" name="status" value="2">
+				<input type="submit" value="Mark As Complete">
+			</form>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+
+<h2>Completed Tasks</h2>
+<table>
+	<% @task_list_completed.each do |x| %>
+	<tr>
+		<td><%= x.task %></td>
+		<td>
+			<%# need to make the button be a "Patch" %>
+			<form action="/<%= x.id %>" method="post">
+				<input type="hidden" name="_method" value="patch">
+				<input type="hidden" name="status" value="1">
+ 				<input type="submit" value="Mark As Incomplete">
+			</form>
+		</td>
+	</tr>
+	<% end %>
+</table>
